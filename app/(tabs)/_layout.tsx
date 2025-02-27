@@ -1,43 +1,52 @@
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
-
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import {Image} from  'react-native';
+import {icons} from '@/content/assets';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
+    <Tabs initialRouteName='home' screenOptions={{  tabBarShowLabel: false, tabBarActiveTintColor: 'blue' }}>
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          headerShown: false,
+          title: 'home',
+          tabBarIcon: ({ color }) => (
+            <Image 
+                source={icons.hometabpng}
+                style={{width:20,height:20, tintColor:'green'}}
+                resizeMode='contain'
+            />
+          ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="setting"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          headerShown: false,
+          title: 'Settings', //the title will appear when the headerShown is True
+          tabBarIcon: ({ color }) => (
+            <Image 
+                source={icons.spoontabpng}
+                // style={{width:40,height:40,}}
+                resizeMode='contain'
+            />
+          ),
+        //   tabBarIcon: ({ color }) => <FontAwesome size={28} name="cog" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          headerShown: false,
+          title: 'profile',
+          tabBarIcon: ({ color }) => (
+            <Image 
+                source={icons.profiletabpng}
+                style={{}}
+                resizeMode='contain'
+            />
+          ),
         }}
       />
     </Tabs>
